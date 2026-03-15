@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Capa_AccesoDatos/Capa_AccesoDatos.csproj" Id="d402739d-44ee-4206-b0e9-ed3c053b86dc" />
+  <Project Path="Capa_LogicaDeNegocios/Capa_LogicaDeNegocios.csproj" Id="6dc19aed-ccb4-4325-bc0e-91aa668925e3" />
+  <Project Path="PRACTICA_AEAE 2_Sofia/Capa_Presentacion.csproj" Id="e3b1d5ca-9906-4a34-985e-19fe28e60945" />
+</Solution>
