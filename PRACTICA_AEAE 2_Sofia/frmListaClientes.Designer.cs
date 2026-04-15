@@ -33,13 +33,15 @@
             this.btnNuevo = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnSalir = new MaterialSkin.Controls.MaterialRaisedButton();
             this.dgClientes = new System.Windows.Forms.DataGridView();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.Id_Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.strDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StrDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strTelefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StrEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnBorrar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.lblTitulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgClientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +49,7 @@
             // 
             this.txtbuscarporcliente.Depth = 0;
             this.txtbuscarporcliente.Hint = "Buscar por Cliente";
-            this.txtbuscarporcliente.Location = new System.Drawing.Point(12, 125);
+            this.txtbuscarporcliente.Location = new System.Drawing.Point(28, 125);
             this.txtbuscarporcliente.MaxLength = 32767;
             this.txtbuscarporcliente.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtbuscarporcliente.Name = "txtbuscarporcliente";
@@ -117,8 +119,10 @@
             this.dgClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id_Cliente,
             this.strCliente,
-            this.strDocumento,
+            this.NumDocumento,
+            this.StrDireccion,
             this.strTelefono,
+            this.StrEmail,
             this.btnEditar,
             this.btnBorrar});
             this.dgClientes.Location = new System.Drawing.Point(12, 181);
@@ -126,6 +130,16 @@
             this.dgClientes.Size = new System.Drawing.Size(786, 177);
             this.dgClientes.TabIndex = 5;
             this.dgClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgClientes_CellContentClick);
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.Location = new System.Drawing.Point(296, 45);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(204, 25);
+            this.lblTitulo.TabIndex = 6;
+            this.lblTitulo.Text = "Administrar Clientes";
             // 
             // Id_Cliente
             // 
@@ -137,17 +151,27 @@
             // 
             this.strCliente.HeaderText = "CLIENTE";
             this.strCliente.Name = "strCliente";
-            this.strCliente.Width = 300;
+            this.strCliente.Width = 250;
             // 
-            // strDocumento
+            // NumDocumento
             // 
-            this.strDocumento.HeaderText = "DOCUMENTO";
-            this.strDocumento.Name = "strDocumento";
+            this.NumDocumento.HeaderText = "DOCUMENTO";
+            this.NumDocumento.Name = "NumDocumento";
+            // 
+            // StrDireccion
+            // 
+            this.StrDireccion.HeaderText = "DIRECCION";
+            this.StrDireccion.Name = "StrDireccion";
             // 
             // strTelefono
             // 
             this.strTelefono.HeaderText = "TELEFONO";
             this.strTelefono.Name = "strTelefono";
+            // 
+            // StrEmail
+            // 
+            this.StrEmail.HeaderText = "EMAIL";
+            this.StrEmail.Name = "StrEmail";
             // 
             // btnEditar
             // 
@@ -166,16 +190,6 @@
             this.btnBorrar.Text = "BORRAR";
             this.btnBorrar.UseColumnTextForButtonValue = true;
             this.btnBorrar.Width = 80;
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(270, 42);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(204, 25);
-            this.lblTitulo.TabIndex = 6;
-            this.lblTitulo.Text = "Administrar Clientes";
             // 
             // frmListaClientes
             // 
@@ -203,12 +217,14 @@
         private MaterialSkin.Controls.MaterialRaisedButton btnNuevo;
         private MaterialSkin.Controls.MaterialRaisedButton btnSalir;
         private System.Windows.Forms.DataGridView dgClientes;
+        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id_Cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn strCliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn strDocumento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumDocumento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StrDireccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn strTelefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StrEmail;
         private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
         private System.Windows.Forms.DataGridViewButtonColumn btnBorrar;
-        private System.Windows.Forms.Label lblTitulo;
     }
 }

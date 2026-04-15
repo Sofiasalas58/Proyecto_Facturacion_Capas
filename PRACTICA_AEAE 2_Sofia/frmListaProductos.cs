@@ -1,103 +1,109 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Capa_LogicaDeNegocios;
 
 namespace PRACTICA_AEAE_2_Sofia
 {
     public partial class frmListaProductos : Form
     {
-        Acceso_datos Acceso = new Acceso_datos();
-        DataTable dt =new DataTable();
+        private readonly Cls_Productos Obj_Productos = new Cls_Productos();
+        private DataTable dt;
+
         public frmListaProductos()
         {
             InitializeComponent();
         }
 
-        private void LLENAR_GRID()
+        private void frmListaProductos_Load(object sender, EventArgs e)
+        {
+            LlenarGrid();
+        }
+
+        private void LlenarGrid()
         {
             dataGridproductos.Rows.Clear();
-
-            string sentencia = $"Select IdProducto, StrNombre, StrCodigo, " +
-                               $"NumPrecioCompra, NumPrecioVenta, " +
-                               $"IdCategoria, StrDetalle" +
-                               $"NumStock, DtmFechaModifica," +
-                               $"StrUsuarioModifica" +
-                               $"From TBLPRODUCTO";
-
-            dt = Acceso.EjecutarComandoDatos(sentencia);
+            dt = Obj_Productos.Consulta_Productos();
+            if (dt == null) return;
 
             foreach (DataRow row in dt.Rows)
             {
                 dataGridproductos.Rows.Add(
-                    row[0],  // IdProducto
-                    row[1],  // StrNombre
-                    row[2],  // StrCodigo
-                    row[3],  // NumPrecioCompra
-                    row[4],  // NumPrecioVenta
-                    row[5],  // IdCategoria
-                    row[6],  // StrDetalle
-                    row[7],  // NumStock
-                    row[8],  // DtmFechaModifica
-                    row[9]   // StrUsuarioModifica
-                    
-                );
+                    row["IdProducto"],
+                    row["StrNombre"],
+                    row["StrCodigo"],
+                    row["NumPrecioCompra"],
+                    row["NumPrecioVenta"],
+                    row["StrCategoriaDesc"],
+                    row["StrDetalle"],
+                    row["NumStock"]);
             }
         }
 
-        private void frmListaProductos_Load(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
-            LLENAR_GRID();
+            dataGridproductos.Rows.Clear();
+            string filtro = txtbuscarproducto.Text.Trim();
+            dt = Obj_Productos.Filtrar_Productos(filtro);
+            if (dt == null) return;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                dataGridproductos.Rows.Add(
+                    row["IdProducto"],
+                    row["StrNombre"],
+                    row["StrCodigo"],
+                    row["NumPrecioCompra"],
+                    row["NumPrecioVenta"],
+                    row["StrCategoriaDesc"],
+                    row["StrDetalle"],
+                    row["NumStock"]);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            frmEditarproducto frm = new frmEditarproducto();
-            frm.IdProducto = 0;  
+            var frm = new frmEditarproducto { IdProducto = 0 };
             frm.ShowDialog();
-            LLENAR_GRID();
+            LlenarGrid();
         }
 
         private void dataGridproductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
+
             if (dataGridproductos.Columns[e.ColumnIndex].Name == "btnEditar")
             {
-                int posActual = dataGridproductos.CurrentRow.Index;
-
-                frmEditarproducto frm = new frmEditarproducto();
-                frm.IdProducto = Convert.ToInt32(dataGridproductos[0, posActual].Value.ToString());
+                int pos = dataGridproductos.CurrentRow.Index;
+                int id = Convert.ToInt32(dataGridproductos.Rows[pos].Cells[0].Value);
+                var frm = new frmEditarproducto { IdProducto = id };
                 frm.ShowDialog();
+                LlenarGrid();
+                return;
             }
 
-            //Borrar
             if (dataGridproductos.Columns[e.ColumnIndex].Name == "btnBorrar")
             {
-                int posActual = dataGridproductos.CurrentRow.Index;
+                int pos = dataGridproductos.CurrentRow.Index;
+                int idProducto = Convert.ToInt32(dataGridproductos.Rows[pos].Cells[0].Value);
+                string nombre = dataGridproductos.Rows[pos].Cells[1].Value?.ToString() ?? "";
 
-                if (MessageBox.Show($"Seguro de borrar el producto {dataGridproductos[1, posActual].Value.ToString()}",
-                    "CONFIRMACION",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(
+                        $"¿Seguro de borrar el producto {nombre}?",
+                        "Confirmación",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    int IdProducto = Convert.ToInt32(dataGridproductos[0, posActual].Value.ToString());
-                    string sentencia = $"DELETE FROM TBLPRODUCTO WHERE IdProducto = {IdProducto}";
-                    string Mensaje = Acceso.EjecutarComando(sentencia);
-                    MessageBox.Show(Mensaje);
+                    string mensaje = Obj_Productos.Borrar_Producto(idProducto);
+                    MessageBox.Show(mensaje);
+                    LlenarGrid();
                 }
             }
-
-            LLENAR_GRID();
         }
-     
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace PRACTICA_AEAE_2_Sofia
+namespace PRACTICA_AEAE_2_Sofia
 {
     partial class frmListaProductos
     {
@@ -42,8 +42,6 @@
             this.IdCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DtmFechaModifica = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.strUsuariomod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnBorrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridproductos)).BeginInit();
@@ -89,6 +87,7 @@
             this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnSalir
             // 
@@ -135,8 +134,6 @@
             this.IdCategoria,
             this.strDetalle,
             this.strCantidad,
-            this.DtmFechaModifica,
-            this.strUsuariomod,
             this.btnEditar,
             this.btnBorrar});
             this.dataGridproductos.Location = new System.Drawing.Point(23, 169);
@@ -178,8 +175,8 @@
             // 
             this.IdCategoria.HeaderText = "CATEGORIA";
             this.IdCategoria.Name = "IdCategoria";
-            this.IdCategoria.ToolTipText = "CATEGORIA";
-            this.IdCategoria.Width = 80;
+            this.IdCategoria.ToolTipText = "Descripción de categoría";
+            this.IdCategoria.Width = 120;
             // 
             // strDetalle
             // 
@@ -193,28 +190,19 @@
             this.strCantidad.Name = "strCantidad";
             this.strCantidad.Width = 120;
             // 
-            // DtmFechaModifica
-            // 
-            this.DtmFechaModifica.DataPropertyName = "DtmFechaModifica";
-            this.DtmFechaModifica.HeaderText = "FECHAMOD";
-            this.DtmFechaModifica.Name = "DtmFechaModifica";
-            this.DtmFechaModifica.ToolTipText = "FECHAMOD";
-            // 
-            // strUsuariomod
-            // 
-            this.strUsuariomod.HeaderText = "USUARIO";
-            this.strUsuariomod.Name = "strUsuariomod";
-            this.strUsuariomod.ToolTipText = "USUARIO";
-            // 
             // btnEditar
             // 
             this.btnEditar.HeaderText = "EDITAR";
             this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Text = "EDITAR";
+            this.btnEditar.UseColumnTextForButtonValue = true;
             // 
             // btnBorrar
             // 
             this.btnBorrar.HeaderText = "BORRAR";
             this.btnBorrar.Name = "btnBorrar";
+            this.btnBorrar.Text = "BORRAR";
+            this.btnBorrar.UseColumnTextForButtonValue = true;
             // 
             // frmListaProductos
             // 
@@ -229,6 +217,7 @@
             this.Controls.Add(this.lblTitulo);
             this.Name = "frmListaProductos";
             this.Text = "Administración Productos";
+            this.Load += new System.EventHandler(this.frmListaProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridproductos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -251,8 +240,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IdCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn strDetalle;
         private System.Windows.Forms.DataGridViewTextBoxColumn strCantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DtmFechaModifica;
-        private System.Windows.Forms.DataGridViewTextBoxColumn strUsuariomod;
         private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
         private System.Windows.Forms.DataGridViewButtonColumn btnBorrar;
     }

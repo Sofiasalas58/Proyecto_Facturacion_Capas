@@ -1,16 +1,9 @@
-﻿namespace PRACTICA_AEAE_2_Sofia
+namespace PRACTICA_AEAE_2_Sofia
 {
     partial class frmEditarproducto
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,25 +15,22 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             this.Titulo = new System.Windows.Forms.Label();
             this.pnlactualizarclientes = new System.Windows.Forms.Panel();
+            this.txtFoto = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.txtDetalle = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.cboCategoria = new System.Windows.Forms.ComboBox();
+            this.lblCategoria = new System.Windows.Forms.Label();
             this.txtCantidad = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtPrecioV = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtPrecioC = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtCodigo = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtNombrep = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this._IDP = new System.Windows.Forms.TextBox();
             this.btnSalir = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnGuardar = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.txtCategoria = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.txtDetalle = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.MensajeError = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlactualizarclientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MensajeError)).BeginInit();
@@ -56,21 +46,74 @@
             this.Titulo.Size = new System.Drawing.Size(100, 25);
             this.Titulo.TabIndex = 2;
             this.Titulo.Text = "Productos";
-            this.Titulo.Click += new System.EventHandler(this.Titulo_Click);
             // 
             // pnlactualizarclientes
             // 
+            this.pnlactualizarclientes.Controls.Add(this.txtFoto);
             this.pnlactualizarclientes.Controls.Add(this.txtDetalle);
-            this.pnlactualizarclientes.Controls.Add(this.txtCategoria);
+            this.pnlactualizarclientes.Controls.Add(this.cboCategoria);
+            this.pnlactualizarclientes.Controls.Add(this.lblCategoria);
             this.pnlactualizarclientes.Controls.Add(this.txtCantidad);
             this.pnlactualizarclientes.Controls.Add(this.txtPrecioV);
             this.pnlactualizarclientes.Controls.Add(this.txtPrecioC);
             this.pnlactualizarclientes.Controls.Add(this.txtCodigo);
             this.pnlactualizarclientes.Controls.Add(this.txtNombrep);
-            this.pnlactualizarclientes.Location = new System.Drawing.Point(32, 156);
+            this.pnlactualizarclientes.Location = new System.Drawing.Point(32, 130);
             this.pnlactualizarclientes.Name = "pnlactualizarclientes";
-            this.pnlactualizarclientes.Size = new System.Drawing.Size(426, 247);
+            this.pnlactualizarclientes.Size = new System.Drawing.Size(470, 275);
             this.pnlactualizarclientes.TabIndex = 3;
+            // 
+            // txtFoto
+            // 
+            this.txtFoto.Depth = 0;
+            this.txtFoto.Hint = "Ruta foto (opcional)";
+            this.txtFoto.Location = new System.Drawing.Point(34, 234);
+            this.txtFoto.MaxLength = 32767;
+            this.txtFoto.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtFoto.Name = "txtFoto";
+            this.txtFoto.PasswordChar = '\0';
+            this.txtFoto.SelectedText = "";
+            this.txtFoto.SelectionLength = 0;
+            this.txtFoto.SelectionStart = 0;
+            this.txtFoto.Size = new System.Drawing.Size(400, 23);
+            this.txtFoto.TabIndex = 7;
+            this.txtFoto.TabStop = false;
+            this.txtFoto.UseSystemPasswordChar = false;
+            // 
+            // txtDetalle
+            // 
+            this.txtDetalle.Depth = 0;
+            this.txtDetalle.Hint = "Detalle";
+            this.txtDetalle.Location = new System.Drawing.Point(34, 205);
+            this.txtDetalle.MaxLength = 32767;
+            this.txtDetalle.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtDetalle.Name = "txtDetalle";
+            this.txtDetalle.PasswordChar = '\0';
+            this.txtDetalle.SelectedText = "";
+            this.txtDetalle.SelectionLength = 0;
+            this.txtDetalle.SelectionStart = 0;
+            this.txtDetalle.Size = new System.Drawing.Size(400, 23);
+            this.txtDetalle.TabIndex = 6;
+            this.txtDetalle.TabStop = false;
+            this.txtDetalle.UseSystemPasswordChar = false;
+            // 
+            // cboCategoria
+            // 
+            this.cboCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCategoria.FormattingEnabled = true;
+            this.cboCategoria.Location = new System.Drawing.Point(34, 178);
+            this.cboCategoria.Name = "cboCategoria";
+            this.cboCategoria.Size = new System.Drawing.Size(400, 21);
+            this.cboCategoria.TabIndex = 5;
+            // 
+            // lblCategoria
+            // 
+            this.lblCategoria.AutoSize = true;
+            this.lblCategoria.Location = new System.Drawing.Point(31, 162);
+            this.lblCategoria.Name = "lblCategoria";
+            this.lblCategoria.Size = new System.Drawing.Size(109, 13);
+            this.lblCategoria.TabIndex = 8;
+            this.lblCategoria.Text = "Categoría (nombre)";
             // 
             // txtCantidad
             // 
@@ -158,13 +201,6 @@
             this.txtNombrep.Tag = "";
             this.txtNombrep.UseSystemPasswordChar = false;
             // 
-            // _IDP
-            // 
-            this._IDP.Location = new System.Drawing.Point(66, 120);
-            this._IDP.Name = "_IDP";
-            this._IDP.Size = new System.Drawing.Size(41, 20);
-            this._IDP.TabIndex = 4;
-            // 
             // btnSalir
             // 
             this.btnSalir.AutoSize = true;
@@ -201,40 +237,6 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // txtCategoria
-            // 
-            this.txtCategoria.Depth = 0;
-            this.txtCategoria.Hint = "Categoria";
-            this.txtCategoria.Location = new System.Drawing.Point(34, 166);
-            this.txtCategoria.MaxLength = 32767;
-            this.txtCategoria.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtCategoria.Name = "txtCategoria";
-            this.txtCategoria.PasswordChar = '\0';
-            this.txtCategoria.SelectedText = "";
-            this.txtCategoria.SelectionLength = 0;
-            this.txtCategoria.SelectionStart = 0;
-            this.txtCategoria.Size = new System.Drawing.Size(266, 23);
-            this.txtCategoria.TabIndex = 5;
-            this.txtCategoria.TabStop = false;
-            this.txtCategoria.UseSystemPasswordChar = false;
-            // 
-            // txtDetalle
-            // 
-            this.txtDetalle.Depth = 0;
-            this.txtDetalle.Hint = "Detalle";
-            this.txtDetalle.Location = new System.Drawing.Point(34, 195);
-            this.txtDetalle.MaxLength = 32767;
-            this.txtDetalle.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtDetalle.Name = "txtDetalle";
-            this.txtDetalle.PasswordChar = '\0';
-            this.txtDetalle.SelectedText = "";
-            this.txtDetalle.SelectionLength = 0;
-            this.txtDetalle.SelectionStart = 0;
-            this.txtDetalle.Size = new System.Drawing.Size(266, 23);
-            this.txtDetalle.TabIndex = 6;
-            this.txtDetalle.TabStop = false;
-            this.txtDetalle.UseSystemPasswordChar = false;
-            // 
             // MensajeError
             // 
             this.MensajeError.ContainerControl = this;
@@ -246,13 +248,14 @@
             this.ClientSize = new System.Drawing.Size(535, 534);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this._IDP);
             this.Controls.Add(this.pnlactualizarclientes);
             this.Controls.Add(this.Titulo);
             this.Name = "frmEditarproducto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administración de productos";
+            this.Load += new System.EventHandler(this.frmEditarproducto_Load);
             this.pnlactualizarclientes.ResumeLayout(false);
+            this.pnlactualizarclientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MensajeError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -263,16 +266,17 @@
 
         private System.Windows.Forms.Label Titulo;
         private System.Windows.Forms.Panel pnlactualizarclientes;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtFoto;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtDetalle;
+        private System.Windows.Forms.ComboBox cboCategoria;
+        private System.Windows.Forms.Label lblCategoria;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtCantidad;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtPrecioV;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtPrecioC;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtCodigo;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtNombrep;
-        private System.Windows.Forms.TextBox _IDP;
         private MaterialSkin.Controls.MaterialRaisedButton btnSalir;
         private MaterialSkin.Controls.MaterialRaisedButton btnGuardar;
-        private MaterialSkin.Controls.MaterialSingleLineTextField txtDetalle;
-        private MaterialSkin.Controls.MaterialSingleLineTextField txtCategoria;
         private System.Windows.Forms.ErrorProvider MensajeError;
     }
 }

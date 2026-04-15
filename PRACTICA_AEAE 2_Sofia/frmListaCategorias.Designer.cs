@@ -1,4 +1,4 @@
-﻿namespace PRACTICA_AEAE_2_Sofia
+namespace PRACTICA_AEAE_2_Sofia
 {
     partial class frmListaCategorias
     {
@@ -31,12 +31,13 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.txtbuscarcategoria = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.dataGridcategoria = new System.Windows.Forms.DataGridView();
-            this.strNombreCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnBorrar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnBuscar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnNuevo = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnSalir = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.IdCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.strDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnBorrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridcategoria)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,7 +72,8 @@
             // 
             this.dataGridcategoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridcategoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.strNombreCategoria,
+            this.IdCategoria,
+            this.strDescripcion,
             this.btnEditar,
             this.btnBorrar});
             this.dataGridcategoria.Location = new System.Drawing.Point(54, 175);
@@ -79,26 +81,6 @@
             this.dataGridcategoria.Size = new System.Drawing.Size(543, 150);
             this.dataGridcategoria.TabIndex = 8;
             this.dataGridcategoria.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridcategoria_CellContentClick);
-            // 
-            // strNombreCategoria
-            // 
-            this.strNombreCategoria.FillWeight = 150F;
-            this.strNombreCategoria.HeaderText = "NOMBRE_CATEGORIA";
-            this.strNombreCategoria.Name = "strNombreCategoria";
-            this.strNombreCategoria.ToolTipText = "NOMBRE_CATEGORIA";
-            this.strNombreCategoria.Width = 300;
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.HeaderText = "EDITAR";
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Text = "EDITAR";
-            // 
-            // btnBorrar
-            // 
-            this.btnBorrar.HeaderText = "BORRAR";
-            this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Text = "BORRAR";
             // 
             // btnBuscar
             // 
@@ -114,6 +96,7 @@
             this.btnBuscar.TabIndex = 10;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnNuevo
             // 
@@ -129,6 +112,7 @@
             this.btnNuevo.TabIndex = 9;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnSalir
             // 
@@ -146,6 +130,33 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // IdCategoria
+            // 
+            this.IdCategoria.HeaderText = "IdCategoria";
+            this.IdCategoria.Name = "IdCategoria";
+            // 
+            // strDescripcion
+            // 
+            this.strDescripcion.FillWeight = 150F;
+            this.strDescripcion.HeaderText = "DESCRIPCION";
+            this.strDescripcion.Name = "strDescripcion";
+            this.strDescripcion.ToolTipText = "DESCRIPCION";
+            this.strDescripcion.Width = 200;
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.HeaderText = "EDITAR";
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Text = "EDITAR";
+            this.btnEditar.UseColumnTextForButtonValue = true;
+            // 
+            // btnBorrar
+            // 
+            this.btnBorrar.HeaderText = "BORRAR";
+            this.btnBorrar.Name = "btnBorrar";
+            this.btnBorrar.Text = "BORRAR";
+            this.btnBorrar.UseColumnTextForButtonValue = true;
+            // 
             // frmListaCategorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,6 +170,7 @@
             this.Controls.Add(this.lblTitulo);
             this.Name = "frmListaCategorias";
             this.Text = "frmListaCategorias";
+            this.Load += new System.EventHandler(this.frmListaCategorias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridcategoria)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -170,11 +182,12 @@
         private System.Windows.Forms.Label lblTitulo;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtbuscarcategoria;
         private System.Windows.Forms.DataGridView dataGridcategoria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn strNombreCategoria;
-        private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
-        private System.Windows.Forms.DataGridViewButtonColumn btnBorrar;
         private MaterialSkin.Controls.MaterialRaisedButton btnBuscar;
         private MaterialSkin.Controls.MaterialRaisedButton btnNuevo;
         private MaterialSkin.Controls.MaterialRaisedButton btnSalir;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdCategoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn strDescripcion;
+        private System.Windows.Forms.DataGridViewButtonColumn btnEditar;
+        private System.Windows.Forms.DataGridViewButtonColumn btnBorrar;
     }
 }

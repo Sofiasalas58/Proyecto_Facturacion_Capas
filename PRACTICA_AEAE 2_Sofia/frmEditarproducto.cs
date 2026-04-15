@@ -1,196 +1,153 @@
-﻿using MaterialSkin;
-using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using MaterialSkin;
+using MaterialSkin.Controls;
+using Capa_LogicaDeNegocios;
 
 namespace PRACTICA_AEAE_2_Sofia
 {
     public partial class frmEditarproducto : MaterialForm
     {
-        public int IdProducto { get; set; } 
-        Acceso_datos Acceso = new Acceso_datos();
-        DataTable dt = new DataTable();
+        public int IdProducto { get; set; }
+
+        private readonly Cls_Productos Obj_Productos = new Cls_Productos();
 
         public frmEditarproducto()
         {
             InitializeComponent();
         }
 
-        private void LLENAR_PRODUCTO()
+        private void frmEditarproducto_Load(object sender, EventArgs e)
+        {
+            LlenarComboCategorias();
+            LlenarProducto();
+        }
+
+        private void LlenarComboCategorias()
+        {
+            DataTable dt = Obj_Productos.Combo_Categorias();
+            cboCategoria.DataSource = dt;
+            cboCategoria.DisplayMember = "StrDescripcion";
+            cboCategoria.ValueMember = "IdCategoria";
+            cboCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void LlenarProducto()
         {
             if (IdProducto == 0)
             {
-                _IDP.Text = "INGRESO NUEVO PRODUCTO";
-            }
-            else
-            {
-                string sentencia = $"select * from TBLPRODUCTO where IdProducto = {IdProducto}";
-
-                dt = Acceso.EjecutarComandoDatos(sentencia);
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    txtNombrep.Text = row["StrNombre"].ToString();
-                    txtCodigo.Text = row["StrCodigo"].ToString();
-                    txtDetalle.Text = row["StrDetalle"].ToString();
-                    txtCategoria.Text = row["StrCategoria"].ToString();
-                    txtPrecioC.Text = row["NumPrecioCompra"].ToString();
-                    txtPrecioV.Text = row["NumPrecioVenta"].ToString();
-                    txtCantidad.Text = row["NumStock"].ToString();
-                   
-                }
-            }
-        }
-        private void Titulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void frmEditarproducto_Load(object sender, EventArgs e)
-        {
-            LLENAR_PRODUCTO();
-        }
-
-
-
-        public bool Guardar()
-        {
-            bool actualizado = false;
-
-            if (validar())
-            {
-                try
-                {
-                    decimal precioCompra = Convert.ToDecimal(txtPrecioC.Text);
-                    decimal precioVenta = Convert.ToDecimal(txtPrecioV.Text);
-                    int stock = Convert.ToInt32(txtCantidad.Text);
-
-                    string sentencia =
-                    $"Exec [actualizar_Producto] {IdProducto}, " +
-                    $"'{txtNombrep.Text}', " +
-                    $"'{txtCodigo.Text}', " +
-                    $"'{txtDetalle.Text}', " +
-                    $"'{txtCategoria.Text}', " +
-                    $"{precioCompra.ToString(System.Globalization.CultureInfo.InvariantCulture)}, " +
-                    $"{precioVenta.ToString(System.Globalization.CultureInfo.InvariantCulture)}, " +
-                    $"{stock}, " +
-                    $"'Sofia', " +
-                    $"'{DateTime.Now.ToString("yyyy-MM-dd")}'";
-
-                    MessageBox.Show(Acceso.EjecutarComando(sentencia));
-                    actualizado = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Falló la operación: " + ex.Message);
-                    actualizado = false;
-                }
+                Titulo.Text = "Ingreso nuevo producto";
+                txtNombrep.Text = "";
+                txtCodigo.Text = "";
+                txtPrecioC.Text = "";
+                txtPrecioV.Text = "";
+                txtCantidad.Text = "";
+                txtDetalle.Text = "";
+                txtFoto.Text = "";
+                if (cboCategoria.Items.Count > 0)
+                    cboCategoria.SelectedIndex = 0;
+                return;
             }
 
-            return actualizado;
+            Titulo.Text = "Editar producto";
+            DataTable dt = Obj_Productos.Consulta_Producto(IdProducto);
+            if (dt == null || dt.Rows.Count == 0) return;
+
+            DataRow row = dt.Rows[0];
+            txtNombrep.Text = row["StrNombre"].ToString();
+            txtCodigo.Text = row["StrCodigo"].ToString();
+            txtPrecioC.Text = row["NumPrecioCompra"].ToString();
+            txtPrecioV.Text = row["NumPrecioVenta"].ToString();
+            txtCantidad.Text = row["NumStock"].ToString();
+            txtDetalle.Text = row["StrDetalle"].ToString();
+            txtFoto.Text = LeerFoto(row);
+
+            if (row["IdCategoria"] != DBNull.Value && cboCategoria.DataSource != null)
+                cboCategoria.SelectedValue = Convert.ToInt32(row["IdCategoria"]);
         }
 
-        private bool validar()
+        private static string LeerFoto(DataRow row)
         {
-            bool correcto = true;
+            if (row.Table.Columns.Contains("strFoto") && row["strFoto"] != DBNull.Value)
+                return row["strFoto"].ToString();
+            if (row.Table.Columns.Contains("StrFoto") && row["StrFoto"] != DBNull.Value)
+                return row["StrFoto"].ToString();
+            return "";
+        }
 
-            // Nombre
+        private bool Validar()
+        {
+            MensajeError.Clear();
+
             if (string.IsNullOrWhiteSpace(txtNombrep.Text))
             {
-                MensajeError.SetError(txtNombrep, "Debe ingresar el nombre del producto");
+                MensajeError.SetError(txtNombrep, "Debe ingresar el nombre del producto.");
                 txtNombrep.Focus();
                 return false;
             }
-            else
-            {
-                MensajeError.SetError(txtNombrep, "");
-            }
 
-            // Código
             if (string.IsNullOrWhiteSpace(txtCodigo.Text))
             {
-                MensajeError.SetError(txtCodigo, "Debe ingresar el código");
+                MensajeError.SetError(txtCodigo, "Debe ingresar el código.");
                 txtCodigo.Focus();
                 return false;
             }
-            else
-            {
-                MensajeError.SetError(txtCodigo, "");
-            }
 
-            // Categoría
-            if (string.IsNullOrWhiteSpace(txtCategoria.Text))
+            if (cboCategoria.SelectedValue == null)
             {
-                MensajeError.SetError(txtCategoria, "Debe ingresar una categoría");
-                txtCategoria.Focus();
+                MessageBox.Show("Debe seleccionar una categoría.");
+                cboCategoria.Focus();
                 return false;
             }
-            else
-            {
-                MensajeError.SetError(txtCategoria, "");
-            }
 
-            // Precio Compra
-            if (!decimal.TryParse(txtPrecioC.Text, out decimal precioCompra))
+            if (!double.TryParse(txtPrecioC.Text, out _))
             {
-                MensajeError.SetError(txtPrecioC, "El precio de compra debe ser numérico");
+                MensajeError.SetError(txtPrecioC, "El precio de compra debe ser numérico.");
                 txtPrecioC.Focus();
                 return false;
             }
-            else
-            {
-                MensajeError.SetError(txtPrecioC, "");
-            }
 
-            // Precio Venta
-            if (!decimal.TryParse(txtPrecioV.Text, out decimal precioVenta))
+            if (!double.TryParse(txtPrecioV.Text, out _))
             {
-                MensajeError.SetError(txtPrecioV, "El precio de venta debe ser numérico");
+                MensajeError.SetError(txtPrecioV, "El precio de venta debe ser numérico.");
                 txtPrecioV.Focus();
                 return false;
             }
-            else
-            {
-                MensajeError.SetError(txtPrecioV, "");
-            }
 
-            // Stock
-            if (!int.TryParse(txtCantidad.Text, out int stock))
+            if (!int.TryParse(txtCantidad.Text, out _))
             {
-                MensajeError.SetError(txtCantidad, "La cantidad debe ser numérica");
+                MensajeError.SetError(txtCantidad, "La cantidad debe ser numérica entera.");
                 txtCantidad.Focus();
                 return false;
             }
-            else
-            {
-                MensajeError.SetError(txtCantidad, "");
-            }
 
-            return correcto;
+            return true;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Guardar())
-            {
-                this.Close();
-            }
+            if (!Validar()) return;
+
+            Obj_Productos.IdProducto = IdProducto;
+            Obj_Productos.StrNombre = txtNombrep.Text.Trim();
+            Obj_Productos.StrCodigo = txtCodigo.Text.Trim();
+            Obj_Productos.NumPrecioCompra = Convert.ToDouble(txtPrecioC.Text);
+            Obj_Productos.NumPrecioVenta = Convert.ToDouble(txtPrecioV.Text);
+            Obj_Productos.IdCategoria = Convert.ToInt32(cboCategoria.SelectedValue);
+            Obj_Productos.StrDetalle = txtDetalle.Text.Trim();
+            Obj_Productos.StrFoto = txtFoto.Text.Trim();
+            Obj_Productos.NumStock = Convert.ToInt32(txtCantidad.Text);
+            Obj_Productos.StrUsuarioModifica = "Sofia";
+
+            string mensaje = Obj_Productos.Guardar();
+            MessageBox.Show(mensaje);
+            Close();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
-
-
     }
 }

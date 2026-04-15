@@ -1,4 +1,4 @@
-﻿namespace PRACTICA_AEAE_2_Sofia
+namespace PRACTICA_AEAE_2_Sofia
 {
     partial class frmEditarCliente
     {
@@ -36,7 +36,6 @@
             this.txtDocumento = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtNombre = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnActualizar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnSalir = new MaterialSkin.Controls.MaterialRaisedButton();
             this.MensajeError = new System.Windows.Forms.ErrorProvider(this.components);
@@ -153,13 +152,6 @@
             this.lblTitulo.TabIndex = 1;
             this.lblTitulo.Text = "Nuevo registro Cliente";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(78, 115);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(41, 20);
-            this.textBox1.TabIndex = 2;
-            // 
             // btnActualizar
             // 
             this.btnActualizar.AutoSize = true;
@@ -207,7 +199,6 @@
             this.ClientSize = new System.Drawing.Size(520, 450);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnActualizar);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pnlactualizarclientes);
             this.Name = "frmEditarCliente";
@@ -231,7 +222,6 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField txtDireccion;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtDocumento;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtNombre;
-        private System.Windows.Forms.TextBox textBox1;
         private MaterialSkin.Controls.MaterialRaisedButton btnActualizar;
         private MaterialSkin.Controls.MaterialRaisedButton btnSalir;
         private System.Windows.Forms.ErrorProvider MensajeError;
